@@ -1,6 +1,6 @@
 services:
   # The PostgreSQL Database
-  - type: psql
+  - type: postgres
     name: whatsway-db
     plan: free # Can upgrade to standard or pro later
     region: singapore # Change as needed based on your users
