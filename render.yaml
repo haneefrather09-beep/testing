@@ -1,29 +1,20 @@
 services:
-  # The PostgreSQL Database
-  - type: postgres
-    name: whatsway-db
-    plan: free # Can upgrade to standard or pro later
-    region: singapore # Change as needed based on your users
-    postgresMajorVersion: 16
-
   # The NodeJS App
   - type: web
     name: whatsway-platform
     env: node
-    plan: free # Render limits WebSockets heavily on Free, consider "starter" when going live
+    plan: free 
     region: singapore
     buildCommand: npm install && npm run build
-    startCommand: npm run start
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATABASE_URL # Bound automatically to the database created above
-        fromDatabase:
-          name: whatsway-db
-          property: connectionString
+      - key: DATABASE_URL 
+        sync: false
       - key: PORT
         value: 10000 
       - key: VITE_API_URL
-        value: https://whatsway-platform.onrender.com # Change this if using a custom domain
+        value: https://whatsway-platform.onrender.com 
       - key: SESSION_SECRET
-        generateValue: true # Render will insert a random secure token
+        generateValue: true
